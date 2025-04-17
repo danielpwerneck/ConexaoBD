@@ -12,6 +12,23 @@ namespace ConexaoBD
 
         string dadosConexao ="server=localhost;user=root;database=banco_ti41;port=3306;password=";
 
+        public DataTable ExecutaSelect( string query)
+        {   
+               //Cria e abre a conexão com o banco
+             MySqlConnection conexao = new MySqlConnection(dadosConexao);
+            conexao.Open();
+
+                //Rodar a query dentro do banco
+            MySqlCommand comando = new MySqlCommand(query, conexao);
+            MySqlDataAdapter dados = new MySqlDataAdapter(comando);
+            DataTable dt = new DataTable();
+            dados.Fill(dt);
+            conexao.Close();                
+            return dt;
+
+
+        }
+
         public List<Produto> BuscaProdutos()
         {
             //Abrir conexão com banco
